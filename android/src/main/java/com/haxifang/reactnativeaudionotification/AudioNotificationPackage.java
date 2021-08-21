@@ -1,4 +1,4 @@
-package com.reactnativeaudionotification;
+package com.haxifang.reactnativeaudionotification;
 
 import androidx.annotation.NonNull;
 

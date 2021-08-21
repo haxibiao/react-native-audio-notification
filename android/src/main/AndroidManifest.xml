@@ -1,4 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.reactnativeaudionotification">
+  package="com.haxifang.reactnativeaudionotification">
 
+  <application>
+    <service android:name=".AudioNotificationService" />
+    <receiver android:name=".AudioNotificationReceiver">
+      <intent-filter>
+        <action android:name="${applicationId}.musicnotificaion.TO.*" />
+      </intent-filter>
+    </receiver>
+  </application>
 </manifest>

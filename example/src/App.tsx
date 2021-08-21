@@ -1,18 +1,83 @@
-import * as React from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import AudioNotification from 'react-native-audio-notification';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const notRef = useRef<any>();
+  useEffect(() => {
+    const not = AudioNotification({
+      title: 'hello bin',
+      description: 'aaaaaa',
+      cover:
+        'https://cos.haxibiao.com/storage/app-haxibiao/images60d9f18cbe7f4.png',
+      is_play: true,
+      is_like: true,
+    });
+    notRef.current = not;
+    not?.subscribe('onClickLike', (event: any) => {
+      console.log('用户点击了喜欢', event);
+    });
 
-  React.useEffect(() => {
-    AudioNotification.multiply(3, 7).then(setResult);
+    not?.subscribe('onClickLast', (event: any) => {
+      notRef.current.setAudioConfig({
+        title: '这是上一首歌啦！',
+        description: '好听吧？',
+        cover:
+          'https://cdn.wwads.cn/creatives/ExTzh9Si3x4d9Aa70NuQSyz1ULuwugvJYbzmNsr6.png',
+      });
+      notRef.current?.update();
+      console.log('用户点击了上一首', event);
+    });
+
+    not?.subscribe('onClickPlay', (event: any) => {
+      console.log('用户点击了播放/暂停', event);
+    });
+
+    not?.subscribe('onClickNext', (event: any) => {
+      console.log('用户点击了下一首', event);
+    });
+
+    not?.subscribe('onClickClose', (event: any) => {
+      console.log('用户点击了关闭', event);
+      notRef.current?.cancel();
+    });
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          notRef.current?.notify();
+        }}
+      >
+        <Text style={{ color: '#FFF' }}>推送通知</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          notRef.current?.cancel();
+        }}
+      >
+        <Text style={{ color: '#FFF' }}>关闭通知</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          notRef.current.setAudioConfig({
+            title: '修改成功啦！！！',
+            description: '你看这是已经修改好了的',
+            cover:
+              'https://res.hc-cdn.com/cpage-pep-home-page/2.0.3/components/solutions/images/%E5%86%9C%E4%B8%9A.jpg',
+          });
+          notRef.current?.update();
+        }}
+      >
+        <Text style={{ color: '#FFF' }}>修改通知</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -27,5 +92,12 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginVertical: 20,
+  },
+  button: {
+    paddingHorizontal: 35,
+    paddingVertical: 15,
+    borderRadius: 100,
+    backgroundColor: '#F76',
+    marginBottom: 15,
   },
 });
