@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/react-native-audio-notification.svg)](https://badge.fury.io/js/react-native-audio-notification) ![![GitHub Repo stars](https://github.com/haxibiao/react-native-audio-notification)](https://img.shields.io/github/stars/haxibiao/react-native-audio-notification?style=social)
 
-[简体中文](README.md) | [English](README_en.md)
+[简体中文](README.md) | [English](README_EN.md)
 
 🪁 React Native Audio notification for Android
 
