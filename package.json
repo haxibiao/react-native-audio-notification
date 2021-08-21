@@ -1,7 +1,7 @@
 {
   "name": "react-native-audio-notification",
-  "version": "0.1.0",
-  "description": "Audio notification for Android",
+  "version": "0.1.1",
+  "description": "React Native Audio notification for Android",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",

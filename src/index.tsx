@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter } from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
 export interface CALLBACK_EVENT_TYPE {
   onClickLike: string; // 点击了喜欢
@@ -20,7 +20,14 @@ const listenerCache: any = {};
 
 export default (config: AUDIO_PROPS_TYPE) => {
   const { RNAudioNotification } = NativeModules;
-  if (!RNAudioNotification) return;
+  if (!RNAudioNotification || Platform.OS !== 'android')
+    return {
+      notify: () => {},
+      cancel: () => {},
+      update: () => {},
+      setAudioConfig: () => {},
+      subscribe: () => {},
+    };
   const eventEmitter = new NativeEventEmitter(RNAudioNotification);
   RNAudioNotification.initAudioNotification({ ...config });
 
