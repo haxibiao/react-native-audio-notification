@@ -23,8 +23,7 @@ export default function App() {
       notRef.current.setAudioConfig({
         title: '这是上一首歌啦！',
         description: '好听吧？',
-        cover:
-          'https://cdn.wwads.cn/creatives/ExTzh9Si3x4d9Aa70NuQSyz1ULuwugvJYbzmNsr6.png',
+        cover: 'https://cos.haxibiao.com/storage/avatar/avatar-2.jpg',
       });
       notRef.current?.update();
       console.log('用户点击了上一首', event);
@@ -71,7 +70,7 @@ export default function App() {
             title: '修改成功啦！！！',
             description: '你看这是已经修改好了的',
             cover:
-              'https://res.hc-cdn.com/cpage-pep-home-page/2.0.3/components/solutions/images/%E5%86%9C%E4%B8%9A.jpg',
+              'https://cos.haxibiao.com/storage/app-haxibiao/images61206e53659ce.png',
           });
           notRef.current?.update();
         }}

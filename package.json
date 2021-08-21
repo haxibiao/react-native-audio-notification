@@ -34,7 +34,9 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "notification",
+    "audio"
   ],
   "repository": "https://github.com/haxibiao/react-native-audio-notification",
   "author": "Bin <bin@PBK6.cn> (https://github.com/haxibiao)",

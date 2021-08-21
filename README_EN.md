@@ -4,72 +4,70 @@
 
 [简体中文](README.md) | [English](README_en.md)
 
-🪁 适用于 React Native 的一个 Android 音频通知控制模块
+🪁 React Native Audio notification for Android
 
-> ⚠️ 目前仅适用于 Android 设备
+> ⚠️ Currently only available for Android devices
 
-## 安装 🔨
+## Installation
 
 ```sh
 npm install react-native-audio-notification
 ```
 
-或者
+or
 
 ```sh
 yarn add react-native-audio-notification
 ```
 
-## 使用 📚
+## Usage
 
 ```js
 import AudioNotification from 'react-native-audio-notification';
 
-// 初始化 AudioNotification
+// Initialization AudioNotification
 const audio = {
-  title: '有没有那么一首歌',
-  description: '听了这首歌希望你能不那么悲伤…',
+  title: 'STAY',
+  description: 'The Kid LAROI / Justin Bieber',
   cover:
-    'https://cos.haxibiao.com/storage/app-haxibiao/images60d9f18cbe7f4.png',
+    'http://p2.music.126.net/e5cvcdgeosDKTDrkTfZXnQ==/109951166155165682.jpg',
   is_play: true,
   is_like: true,
 };
 const notice = AudioNotification(audio);
 
-// 推送通知
+// Push Notification
 notice.notify();
 
-// 关闭通知
+// Turn off notification
 notice.cancel();
 
-// 修改配置
+// Modify configuration
 notice.setAudioConfig(audio);
 
-// 更新通知（当重新设置音频数据时调用）
+// Update notification (called when audio data is reset)
 notice.update();
 
-// 监听用户事件
+// Monitor user events
 const action = 'onClickLike' | 'onClickLast' | 'onClickPlay' | 'onClickNext' | 'onClickClose';
 notice?.subscribe(action, (event: any) => {
   console.log('User manipulated ' + action, event);
 });
-
 ```
 
-> 更多使用详细代码例子可以查看 [example/src/App.tsx](/example/src/App.tsx)
+> for more detailed code examples, you can see [example/src/App.tsx](/example/src/App.tsx)
 
-## 预览 📎
+## Screenshot
 
 <a href="docs/static/screenshot_001.jpg">
   <img src="docs/static/screenshot_001.jpg" alt="screenshot001" height="260" style="max-width:100%;">
 </a>
 
-## 贡献
+## Contributing
 
-可以查看 [贡献指南](CONTRIBUTING.md) 提交 PR 或者提出 Issue ， 我们会尽快处理 ❤️
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
-使用模块的话可以点个 Star 鼓励一下我们
-
+If you use the module, you can click Star to encourage us.
 ## License
 
 MIT
