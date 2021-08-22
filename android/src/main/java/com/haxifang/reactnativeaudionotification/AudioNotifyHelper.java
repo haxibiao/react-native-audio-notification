@@ -7,12 +7,16 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.FutureTarget;
@@ -68,6 +72,7 @@ public class AudioNotifyHelper {
     NOTIFY_ID = android.os.Process.myPid();
     // NOTIFY_ID = 10001;
     notifyManager = (NotificationManager) mContext.getSystemService(mContext.NOTIFICATION_SERVICE);
+    mSmallIcon = mContext.getApplicationInfo().icon;
     notify = buildNotification(mContext);
 
     // 启动服务，通过服务将图标点击的回调广播注册到 App
@@ -100,12 +105,17 @@ public class AudioNotifyHelper {
       builder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID)
         .setSmallIcon(mSmallIcon)
         .setOngoing(mOngoing)
+        .setOnlyAlertOnce(true)
         .setShowWhen(mShowWhen);
     } else {
 
       builder = new Notification.Builder(context)
         .setPriority(mPriority)
         .setSmallIcon(mSmallIcon)
+        .setDefaults(NotificationCompat.FLAG_ONLY_ALERT_ONCE)
+        .setSound(null)
+        .setOnlyAlertOnce(true)
+        .setVibrate(new long[]{0})
         .setOngoing(mOngoing);
 
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -240,10 +250,13 @@ public class AudioNotifyHelper {
   private void setupNotificationChannel(Context context) {
     String channelName = context.getPackageName();
     String channelDescription = "Notifications from " + channelName;
-    int importance = NotificationManager.IMPORTANCE_HIGH;
+    int importance = NotificationManager.IMPORTANCE_LOW;
 
     NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, importance);
     channel.setDescription(channelDescription);
+    channel.setSound(null, null);
+    channel.enableVibration(false);
+    channel.enableLights(false);
     NotificationManager manager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
     manager.createNotificationChannel(channel);
   }
